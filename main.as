@@ -1,0 +1,232 @@
+//  
+import flash.events.MouseEvent;
+import flash.display.*;
+import flash.text.*;
+import com.classes.Note;
+
+//////////////Constants//////////////
+const DOC_ORIGIN_X:Number = 41;
+const DOC_ORIGIN_Y:Number = 27;
+const DOC_WIDTH:Number = 800;
+const DOC_HEIGHT:Number = 3108.4;
+const TXT_ADD_COMMENT_INITX:Number = 0;
+const TXT_ADD_COMMENT_INITY:Number = 0;
+const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 176;
+const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 72;
+const BTN_CANCEL_ADD_COMMENT_INITX:Number = 120;
+const BTN_CANCEL_ADD_COMMENT_INITY:Number = 72;
+//////////////Constants//////////////
+
+
+//////////////Event Handlers//////////////
+//Dragging
+Document.addEventListener(MouseEvent.MOUSE_DOWN, hnd_drag);
+Document.addEventListener(MouseEvent.MOUSE_UP, hnd_drag_stop);
+//Add Comment Buttons
+btnAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_addComment);
+btnConfirmAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_confAddComment);
+btnCancelAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_cancelAddComment);
+//////////////Event Handlers//////////////
+
+
+//////////////Initialize//////////////
+init_all();
+//////////////Initialize//////////////
+
+
+//////////////Global Vars//////////////
+//Make a list of Notes to store all the ntoes created in thi session
+var CurrentNotes:Array = new Array();
+var CurrentUser:String;
+//var RectDragBounds:Rectangle = new Rectangle(DOC_ORIGIN_X, (-1*Number.MAX_VALUE), DOC_WIDTH, Number.MAX_VALUE);------------wont let me drag off stge
+//////////////Global Vars//////////////
+
+
+//////////////Load Data//////////////
+var xmlLoader:URLLoader = new URLLoader();
+var XmlData:XML = new XML(); //global
+ 
+xmlLoader.addEventListener(Event.COMPLETE, load_xml);
+xmlLoader.load(new URLRequest("data/data.xml"));
+ 
+function load_xml(e:Event):void
+{
+  XmlData = new XML(e.target.data);
+//  ParseBooks(xmlData);
+  print_notes();
+}
+
+function show_noteBtns():void
+{
+  //Loop through all the notes for the document and create a new instance
+  // of the NOTE_BUTTON button and add it to Document movieclip
+
+  //testing adding btn
+  
+
+/*  var noteList:XMLList = XmlData.DOCUMENT.USER.NOTE;
+  for each (var noteElement:XML in noteList)
+  {
+    trace(noteElement);
+  }*/
+
+}
+
+function ParseBooks(inputXML:XML):void
+{
+  trace("XML Output");
+  trace("------------------------");
+  trace(inputXML.DOCUMENT.USER.NOTE.text()[0]);
+  trace(inputXML.DOCUMENT.USER.NOTE.text()[1]);
+}
+
+function print_notes():void
+{
+  //This is the document we want
+  var desiredDocTitle:String = "Inventing the Medium";
+
+/*  //Get every document's title
+  var docAttributes:XMLList = XmlData.DOCUMENT.attribute("title");
+
+  for each (var docTitle:XML in docAttributes)
+  {
+//    trace(docTitle);
+//    trace(documentTitle);
+    if(docTitle == desiredDocTitle)
+    {
+      trace(docTitle);
+    }
+  }*/
+
+  //Prints out all the notes
+  var noteList:XMLList = XmlData.DOCUMENT.USER.NOTE;
+  for each (var noteElement:XML in noteList)
+  {
+    trace(noteElement);
+  }
+
+}
+//////////////Load Data//////////////
+
+
+//////////////Event Handlers//////////////
+function hnd_drag(Event:MouseEvent):void
+{
+//	Document.startDrag(false, RectDragBounds);
+  Document.startDrag();
+	check_bounds();
+}
+function hnd_drag_stop(Event:MouseEvent):void
+{
+	Document.stopDrag();
+	check_bounds();
+}
+
+function hnd_addComment(Event:MouseEvent):void
+{
+  //Display the text box and buttons
+  show_addComment();
+}
+function hnd_confAddComment(Event:MouseEvent):void
+{
+  //Hide the comment box
+  reset_addComment();
+  //Create a new Note and add it to our list of current notes
+  var tmpNote:Note = new Note(txtAddComment.text, CurrentUser, btnAddComment.y);
+  CurrentNotes.push(tmpNote);
+
+  //Refresh our comments so the new one is displayed
+  
+  //HACK
+  //Create a new btnComment to indicate that a new comment was added--??
+  //
+  
+}
+function hnd_cancelAddComment(Event:MouseEvent):void
+{
+  //abort and reset the add comment fields
+  reset_addComment();
+}
+//////////////Event Handlers//////////////
+
+
+//////////////Other Functionality//////////////
+function init_all():void
+{
+  //Init our global vars
+  CurrentUser = "JR";//--------------------------------------------------------this should change to a drop down
+  reset_addComment();
+}
+
+
+//Check whether the map is being moved too far
+function check_bounds():void
+{
+	//check left
+	if( Document.x > DOC_ORIGIN_X )
+		Document.x = DOC_ORIGIN_X;
+	
+	//check top
+/*  if( Document.y > DOC_ORIGIN_Y )
+    Document.y = DOC_ORIGIN_Y;*/
+
+	//check right
+	if( (Document.x + Document.width) < (DOC_ORIGIN_X + DOC_WIDTH) )
+		Document.x = (DOC_ORIGIN_X - (Document.width-DOC_WIDTH));
+
+	//check bottom left
+/*  if( (Document.y + Document.height) < (DOC_ORIGIN_Y + FRAME_HEIGHT) )
+    Document.y = (DOC_ORIGIN_Y - (Document.height-FRAME_HEIGHT));*/
+}
+
+function reset_addComment():void
+{
+  //Hide all the elements
+  txtAddComment.visible = false;
+  btnConfirmAddComment.visible = false;
+  btnCancelAddComment.visible = false;
+  //Clear the text
+  txtAddComment.text = "";
+  //Place them in their starting positions
+  txtAddComment.x = TXT_ADD_COMMENT_INITX;
+  txtAddComment.y = TXT_ADD_COMMENT_INITY;
+  btnConfirmAddComment.x = BTN_CONFIRM_ADD_COMMENT_INITX;
+  btnConfirmAddComment.y = BTN_CONFIRM_ADD_COMMENT_INITY;
+  btnCancelAddComment.x = BTN_CANCEL_ADD_COMMENT_INITX;
+  btnCancelAddComment.y = BTN_CANCEL_ADD_COMMENT_INITY;
+}
+function show_addComment():void
+{
+  //Hide all the elements
+  txtAddComment.visible = true;
+  btnConfirmAddComment.visible = true;
+  btnCancelAddComment.visible = true;
+  //Place them in their appropriate place by the button
+  txtAddComment.x = btnAddComment.x + 10;
+  txtAddComment.y = btnAddComment.y;
+  //These are relative to the placement of the text box
+  btnConfirmAddComment.x = txtAddComment.x + (BTN_CONFIRM_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
+  btnConfirmAddComment.y = txtAddComment.y + (BTN_CONFIRM_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
+  btnCancelAddComment.x = txtAddComment.x + (BTN_CANCEL_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
+  btnCancelAddComment.y = txtAddComment.y + (BTN_CANCEL_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
+}
+
+//////////////Other Functionality//////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

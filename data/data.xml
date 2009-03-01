@@ -1,14 +1,12 @@
 <ROOT>
 <DOCUMENT src="docs/doc.jpg" title="Inventing the Medium">
   <USER name="JR">
-    <NOTE ypos="20">I don't understand what she's referring to here</NOTE>
-    <NOTE ypos="25">This is an interesting point regarding the digital medium</NOTE>
+    <NOTE ypos="200">I don't understand what she's referring to here</NOTE>
+    <NOTE ypos="225">This is an interesting point regarding the digital medium</NOTE>
   </USER>
   <USER name="Jenna">
-    <NOTE ypos="20">She's talking about digital life</NOTE>
-    <NOTE ypos="30">I disagree with this after having read this www.google.com</NOTE>
+    <NOTE ypos="200">She's talking about digital life</NOTE>
+    <NOTE ypos="300">I disagree with this after having read this www.google.com</NOTE>
   </USER>
-</DOCUMENT>
-<DOCUMENT src="docs/doc.jpg" title="Slides">
 </DOCUMENT>
 </ROOT>

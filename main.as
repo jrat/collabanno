@@ -15,6 +15,7 @@ const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 176;
 const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 72;
 const BTN_CANCEL_ADD_COMMENT_INITX:Number = 120;
 const BTN_CANCEL_ADD_COMMENT_INITY:Number = 72;
+const NOTE_XPOS:Number = 1000;
 //////////////Constants//////////////
 
 
@@ -36,32 +37,70 @@ init_all();
 
 //////////////Global Vars//////////////
 //Make a list of Notes to store all the ntoes created in thi session
-var CurrentNotes:Array = new Array();
+var NoteList:Array = new Array();
 var CurrentUser:String;
 //var RectDragBounds:Rectangle = new Rectangle(DOC_ORIGIN_X, (-1*Number.MAX_VALUE), DOC_WIDTH, Number.MAX_VALUE);------------wont let me drag off stge
 //////////////Global Vars//////////////
 
-
-//////////////Load Data//////////////
-var xmlLoader:URLLoader = new URLLoader();
+//////////////RUN//////////////
+var XmlLoader:URLLoader = new URLLoader();
 var XmlData:XML = new XML(); //global
+XmlLoader.addEventListener(Event.COMPLETE, load_xml);
+XmlLoader.load(new URLRequest("data/data.xml"));
+
+//////////////RUN//////////////
  
-xmlLoader.addEventListener(Event.COMPLETE, load_xml);
-xmlLoader.load(new URLRequest("data/data.xml"));
- 
-function load_xml(e:Event):void
+
+
+//////////////Data Handling//////////////
+function load_xml(e:Event):void 
 {
   XmlData = new XML(e.target.data);
-//  ParseBooks(xmlData);
-  print_notes();
+
+  //Returns all nodes in a particular document
+  var annotators:XMLList = XmlData.DOCUMENT.USER;
+//  trace(annotators.attribute("name"));
+  for (var i:int = 0; i < annotators.length(); i++)
+  {
+//    trace(annotators[i].attribute("name")); //Prints the name
+    //Get all notes for this annotator and loop through each one
+    for each (var curNote in annotators[i].NOTE)
+    {
+      var tmpNote:Note = new Note( annotators[i].attribute("name"), curNote.text(), curNote.attribute("ypos"));
+      //Add it to our list
+      NoteList.push(tmpNote);
+//      trace(curNote.text()); //Prints the note
+    }
+//    trace(annotators[i].NOTE.text());
+  }
+
+  //Now that existing notes are loaded, lets show our buttons
+  init_noteBtns();
 }
 
+//Loop through oure note list and create a new button for each
+function init_noteBtns():void
+{
+    //Loop through all the notes for the document and create a new instance
+    // of the NOTE_BUTTON button and add it to Document movieclip
+
+   for (var i:int = 0; i < NoteList.length; i++)
+   {
+      //Adds a button
+      var newCircle:CircleBlue = new CircleBlue();
+      newCircle.set_noteText(NoteList[i].get_note());
+      newCircle.set_pos(NOTE_XPOS, NoteList[i].get_ypos());
+      this.addChild(newCircle);//Document.addChild   ????
+
+      newCircle.x = newCircle.get_xpos();
+      newCircle.y = newCircle.get_ypos();
+   }
+}
+
+//Called by load_xml
 function show_noteBtns():void
 {
-  //Loop through all the notes for the document and create a new instance
-  // of the NOTE_BUTTON button and add it to Document movieclip
 
-  //testing adding btn
   
 
 /*  var noteList:XMLList = XmlData.DOCUMENT.USER.NOTE;
@@ -72,14 +111,6 @@ function show_noteBtns():void
 
 }
 
-function ParseBooks(inputXML:XML):void
-{
-  trace("XML Output");
-  trace("------------------------");
-  trace(inputXML.DOCUMENT.USER.NOTE.text()[0]);
-  trace(inputXML.DOCUMENT.USER.NOTE.text()[1]);
-}
-
 function print_notes():void
 {
   //This is the document we want
@@ -87,23 +118,21 @@ function print_notes():void
 
 /*  //Get every document's title
   var docAttributes:XMLList = XmlData.DOCUMENT.attribute("title");
-
   for each (var docTitle:XML in docAttributes)
   {
-//    trace(docTitle);
-//    trace(documentTitle);
+    //trace(docTitle);
     if(docTitle == desiredDocTitle)
     {
       trace(docTitle);
     }
   }*/
 
-  //Prints out all the notes
+/*  //Prints out all the notes
   var noteList:XMLList = XmlData.DOCUMENT.USER.NOTE;
   for each (var noteElement:XML in noteList)
   {
     trace(noteElement);
-  }
+  }*/
 
 }
 //////////////Load Data//////////////
@@ -133,7 +162,7 @@ function hnd_confAddComment(Event:MouseEvent):void
   reset_addComment();
   //Create a new Note and add it to our list of current notes
   var tmpNote:Note = new Note(txtAddComment.text, CurrentUser, btnAddComment.y);
-  CurrentNotes.push(tmpNote);
+  NoteList.push(tmpNote);
 
   //Refresh our comments so the new one is displayed
   

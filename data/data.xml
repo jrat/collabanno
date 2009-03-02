@@ -8,5 +8,14 @@
     <NOTE ypos="200">She's talking about digital life</NOTE>
     <NOTE ypos="300">I disagree with this after having read this www.google.com</NOTE>
   </USER>
+  <USER name="Steve">
+    <NOTE ypos="200">I think she's talking a/b something else. We should ask her in class</NOTE>
+  </USER>
+  <USER name="Kristen">
+    <NOTE ypos="250">"Buzz words encourage ambiguity" -JHM</NOTE>
+    <NOTE ypos="275">haha - she really hates Microsoft!</NOTE>
+    <NOTE ypos="300">Norman would disagree with this</NOTE>
+    <NOTE ypos="500">I completely agree here.</NOTE>
+  </USER>
 </DOCUMENT>
 </ROOT>

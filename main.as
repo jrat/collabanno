@@ -3,6 +3,7 @@ import flash.events.MouseEvent;
 import flash.display.*;
 import flash.text.*;
 import com.classes.Note;
+import DynTextBox;
 
 //////////////Constants//////////////
 const DOC_ORIGIN_X:Number = 41;
@@ -15,7 +16,7 @@ const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 176;
 const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 72;
 const BTN_CANCEL_ADD_COMMENT_INITX:Number = 120;
 const BTN_CANCEL_ADD_COMMENT_INITY:Number = 72;
-const NOTE_XPOS:Number = 1000;
+const NOTE_XPOS:Number = 725;
 //////////////Constants//////////////
 
 
@@ -39,24 +40,24 @@ init_all();
 //Make a list of Notes to store all the ntoes created in thi session
 var NoteList:Array = new Array();
 var CurrentUser:String;
+var ButtonClasses:Array = new Array("CircleBlue", "CircleGreen", "CircleRed", "CircleOrange");
 //var RectDragBounds:Rectangle = new Rectangle(DOC_ORIGIN_X, (-1*Number.MAX_VALUE), DOC_WIDTH, Number.MAX_VALUE);------------wont let me drag off stge
 //////////////Global Vars//////////////
 
 //////////////RUN//////////////
-var XmlLoader:URLLoader = new URLLoader();
+var XmlLoaderData:URLLoader = new URLLoader();
 var XmlData:XML = new XML(); //global
-XmlLoader.addEventListener(Event.COMPLETE, load_xml);
-XmlLoader.load(new URLRequest("data/data.xml"));
+XmlLoaderData.addEventListener(Event.COMPLETE, hnd_load_data);
+XmlLoaderData.load(new URLRequest("data/data.xml"));
 
 //////////////RUN//////////////
  
 
 
 //////////////Data Handling//////////////
-function load_xml(e:Event):void 
+function hnd_load_data(e:Event):void 
 {
   XmlData = new XML(e.target.data);
-
   //Returns all nodes in a particular document
   var annotators:XMLList = XmlData.DOCUMENT.USER;
 //  trace(annotators.attribute("name"));
@@ -84,17 +85,100 @@ function init_noteBtns():void
     //Loop through all the notes for the document and create a new instance
     // of the NOTE_BUTTON button and add it to Document movieclip
 
+/*   var tmpName:String = NoteList[0].get_username();
    for (var i:int = 0; i < NoteList.length; i++)
    {
-      //Adds a button
-      var newCircle:CircleBlue = new CircleBlue();
-      newCircle.set_noteText(NoteList[i].get_note());
-      newCircle.set_pos(NOTE_XPOS, NoteList[i].get_ypos());
-      this.addChild(newCircle);//Document.addChild   ????
+      //Check to see if we've changed users yet
+      //if not, keep adding notes to the current button class
+      if( tmpName == NoteList[i].get_username() )
+      {
+        //Adds a button
+        var newCircle:CircleBlue = new CircleBlue();
+        newCircle.set_noteText(NoteList[i].get_note());
+        newCircle.set_pos(NOTE_XPOS, NoteList[i].get_ypos());
+        this.addChild(newCircle);//Document.addChild   ????
 
-      newCircle.x = newCircle.get_xpos();
-      newCircle.y = newCircle.get_ypos();
-   }
+        newCircle.x = newCircle.get_xpos();
+        newCircle.y = newCircle.get_ypos();
+      }
+      else
+      {
+        //if we changed users, start using the next button class
+        break;
+      }
+   }*/
+   
+   //JR
+   var crc01:CircleBlue = new CircleBlue();
+   crc01.set_noteText(NoteList[0].get_note());
+   crc01.set_pos(NOTE_XPOS, NoteList[0].get_ypos());
+   this.addChild(crc01);//Document.addChild   ????
+   crc01.x = crc01.get_xpos();
+   crc01.y = crc01.get_ypos();
+/*   var dyn01:DynTextBox = new DynTextBox();
+   dyn01.hide_dynTextBox();
+   dyn01.set_text(NoteList[0].get_note());
+   this.addChild(dyn01);*/
+
+   var crc02:CircleBlue = new CircleBlue();
+   crc02.set_noteText(NoteList[1].get_note());
+   crc02.set_pos(NOTE_XPOS, NoteList[1].get_ypos());
+   this.addChild(crc02);//Document.addChild   ????
+   crc02.x = crc02.get_xpos();
+   crc02.y = crc02.get_ypos();
+   
+   //Jenna
+   var crc03:CircleGreen = new CircleGreen();
+   crc03.set_noteText(NoteList[2].get_note());
+   crc03.set_pos(NOTE_XPOS, NoteList[2].get_ypos());
+   this.addChild(crc03);//Document.addChild   ????
+   crc03.x = crc03.get_xpos() + 25;
+   crc03.y = crc03.get_ypos();
+
+   var crc04:CircleGreen = new CircleGreen();
+   crc04.set_noteText(NoteList[3].get_note());
+   crc04.set_pos(NOTE_XPOS, NoteList[3].get_ypos());
+   this.addChild(crc04);//Document.addChild   ????
+   crc04.x = crc04.get_xpos();
+   crc04.y = crc04.get_ypos();
+
+   //Steve
+   var crc05:CircleRed = new CircleRed();
+   crc05.set_noteText(NoteList[4].get_note());
+   crc05.set_pos(NOTE_XPOS, NoteList[4].get_ypos());
+   this.addChild(crc05);//Document.addChild   ????
+   crc05.x = crc05.get_xpos() + 50;
+   crc05.y = crc05.get_ypos();
+
+   //Kristen
+   var crc06:CircleOrange = new CircleOrange();
+   crc06.set_noteText(NoteList[5].get_note());
+   crc06.set_pos(NOTE_XPOS, NoteList[5].get_ypos());
+   this.addChild(crc06);//Document.addChild   ????
+   crc06.x = crc06.get_xpos();
+   crc06.y = crc06.get_ypos();
+
+   var crc07:CircleOrange = new CircleOrange();
+   crc07.set_noteText(NoteList[6].get_note());
+   crc07.set_pos(NOTE_XPOS, NoteList[6].get_ypos());
+   this.addChild(crc07);//Document.addChild   ????
+   crc07.x = crc07.get_xpos();
+   crc07.y = crc07.get_ypos();
+   
+   var crc08:CircleOrange = new CircleOrange();
+   crc08.set_noteText(NoteList[7].get_note());
+   crc08.set_pos(NOTE_XPOS, NoteList[7].get_ypos());
+   this.addChild(crc08);//Document.addChild   ????
+   crc08.x = crc08.get_xpos();
+   crc08.y = crc08.get_ypos();
+
+   var crc09:CircleOrange = new CircleOrange();
+   crc09.set_noteText(NoteList[8].get_note());
+   crc09.set_pos(NOTE_XPOS, NoteList[8].get_ypos());
+   this.addChild(crc09);//Document.addChild   ????
+   crc09.x = crc09.get_xpos();
+   crc09.y = crc09.get_ypos();
+
 }
 
 //Called by load_xml
@@ -114,7 +198,7 @@ function show_noteBtns():void
 function print_notes():void
 {
   //This is the document we want
-  var desiredDocTitle:String = "Inventing the Medium";
+//  var desiredDocTitle:String = "Inventing the Medium";
 
 /*  //Get every document's title
   var docAttributes:XMLList = XmlData.DOCUMENT.attribute("title");
@@ -186,7 +270,6 @@ function init_all():void
   CurrentUser = "JR";//--------------------------------------------------------this should change to a drop down
   reset_addComment();
 }
-
 
 //Check whether the map is being moved too far
 function check_bounds():void

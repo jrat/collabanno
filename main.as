@@ -42,7 +42,8 @@ init_all();
 var NoteList:Array = new Array();
 var CurrentUser:String = "JR";
 var CurrentUserColor:String = "blue";
-var ButtonClasses:Array = new Array("CircleBlue", "CircleGreen", "CircleRed", "CircleOrange");
+var CurrBtnsY:Array = new Array();
+//var ButtonClasses:Array = new Array("CircleBlue", "CircleGreen", "CircleRed", "CircleOrange");
 //var RectDragBounds:Rectangle = new Rectangle(DOC_ORIGIN_X, (-1*Number.MAX_VALUE), DOC_WIDTH, Number.MAX_VALUE);------------wont let me drag off stge
 //////////////Global Vars//////////////
 
@@ -110,57 +111,12 @@ function init_noteBtns():void
       }
    }*/
 
-  var tmpBlue:CircleBlue;
-  var tmpGreen:CircleGreen;
-  var tmpOrange:CircleOrange;
-  var tmpRed:CircleRed;
-  
-  var currBtnsY:Array = new Array();
 
   //loop through all notes
   for (var i:int = 0; i < NoteList.length; i++)/////////////////////////////////////////////////////////////now need to make a fxn that checks the ypos
   {//////////////////////////////////////////////////////////////////////////////////of all the entered notes. if one exists where this one is trying to
     //check if we're looking at a new user yet///////////////////////////////////////////go, then add 25pixels to it. this should be called anytime
-    if( NoteList[i].get_colorBtn() == "blue" )//////////////////////////////a new btn is created (here and in the hnd_check)------
-    {
-      tmpBlue = new CircleBlue();
-      tmpBlue.set_noteText(NoteList[i].get_note());
-      tmpBlue.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());
-      Document.addChild(tmpBlue);
-      tmpBlue.x = tmpBlue.get_xpos();
-      tmpBlue.y = tmpBlue.get_ypos();
-      currBtnsY.push(tmpBlue.x);
-    }
-    else if( NoteList[i].get_colorBtn() == "green" )
-    {
-      tmpGreen = new CircleGreen();
-      tmpGreen.set_noteText(NoteList[i].get_note());
-      tmpGreen.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());
-      Document.addChild(tmpGreen);
-      tmpGreen.x = tmpGreen.get_xpos();
-      tmpGreen.y = tmpGreen.get_ypos();
-      currBtnsY.push(tmpGreen.y);
-    }
-    else if( NoteList[i].get_colorBtn() == "orange" )
-    {
-      tmpOrange = new CircleOrange();
-      tmpOrange.set_noteText(NoteList[i].get_note());
-      tmpOrange.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());
-      Document.addChild(tmpOrange);
-      tmpOrange.x = tmpOrange.get_xpos();
-      tmpOrange.y = tmpOrange.get_ypos();
-      currBtnsY.push(tmpOrange.y);
-    }
-    else if( NoteList[i].get_colorBtn() == "red" )
-    {
-      tmpRed = new CircleRed();
-      tmpRed.set_noteText(NoteList[i].get_note());
-      tmpRed.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());//.set_pos(NOTE_XPOS, NoteList[i].get_ypos());
-      Document.addChild(tmpRed);
-      tmpRed.x = tmpRed.get_xpos();
-      tmpRed.y = tmpRed.get_ypos();
-      currBtnsY.push(tmpRed.y);
-    }
+    addBtn(NoteList[i]);
   }
    
 /*   //JR
@@ -232,19 +188,60 @@ function init_noteBtns():void
 
 }
 
-function addBtn():void
+function addBtn(_curNote:Note):void
 {
-  
+//  var CurrBtnsY:Array = new Array();
+
+  if( _curNote.get_colorBtn() == "blue" )//////////////////////////////a new btn is created (here and in the hnd_check)------
+  {
+    var tmpBlue:CircleBlue = new CircleBlue();
+    tmpBlue.set_noteText(_curNote.get_note());
+    tmpBlue.set_pos( (NOTE_XPOS + neededOffset(_curNote.get_ypos())), _curNote.get_ypos());
+    Document.addChild(tmpBlue);
+    tmpBlue.x = tmpBlue.get_xpos();
+    tmpBlue.y = tmpBlue.get_ypos();
+    CurrBtnsY.push(tmpBlue.x);
+  }
+  else if( _curNote.get_colorBtn() == "green" )
+  {
+    var tmpGreen:CircleGreen = new CircleGreen();
+    tmpGreen.set_noteText(_curNote.get_note());
+    tmpGreen.set_pos( (NOTE_XPOS + neededOffset(_curNote.get_ypos())), _curNote.get_ypos());
+    Document.addChild(tmpGreen);
+    tmpGreen.x = tmpGreen.get_xpos();
+    tmpGreen.y = tmpGreen.get_ypos();
+    CurrBtnsY.push(tmpGreen.y);
+  }
+  else if( _curNote.get_colorBtn() == "orange" )
+  {
+    var tmpOrange:CircleOrange = new CircleOrange();
+    tmpOrange.set_noteText(_curNote.get_note());
+    tmpOrange.set_pos( (NOTE_XPOS + neededOffset(_curNote.get_ypos())), _curNote.get_ypos());
+    Document.addChild(tmpOrange);
+    tmpOrange.x = tmpOrange.get_xpos();
+    tmpOrange.y = tmpOrange.get_ypos();
+    CurrBtnsY.push(tmpOrange.y);
+  }
+  else if( _curNote.get_colorBtn() == "red" )
+  {
+    var tmpRed:CircleRed = new CircleRed();
+    tmpRed.set_noteText(_curNote.get_note());
+    tmpRed.set_pos( (NOTE_XPOS + neededOffset(_curNote.get_ypos()) ), _curNote.get_ypos());//.set_pos(NOTE_XPOS, NoteList[i].get_ypos());
+    Document.addChild(tmpRed);
+    tmpRed.x = tmpRed.get_xpos();
+    tmpRed.y = tmpRed.get_ypos();
+    CurrBtnsY.push(tmpRed.y);
+  }
 }
 
 //Loops through existing buttons X positions to see if there's any overlapping
 // buttons. if so, returns how much offset the one about to be added needs
-function neededOffset(_newBtnY:Number, _btnsY:Array):Number
+function neededOffset(_newBtnY:Number):Number
 {
   var offset:Number = 0;
-  for(var i:int=0; i<_btnsY.length; i++)
+  for(var i:int=0; i<CurrBtnsY.length; i++)
   {
-    if(_newBtnY == _btnsY[i])
+    if(_newBtnY == CurrBtnsY[i])
       offset += BTN_NOTE_WIDTH;
   }
   return(offset);
@@ -311,12 +308,13 @@ function hnd_addComment(Event:MouseEvent):void
 }
 function hnd_confAddComment(Event:MouseEvent):void
 {
-  //Hide the comment box
-  reset_addComment();
   //Create a new Note and add it to our list of current notes
   var tmpNote:Note = new Note(CurrentUser, CurrentUserColor, txtAddComment.text, btnAddComment.y);
-  NoteList.push(tmpNote);
+  addBtn(tmpNote);
+//  NoteList.push(tmpNote);////////////////////////////////////////----------------------------------------------------needed??????
 
+  //Hide the comment box
+  reset_addComment();
   //Refresh our comments so the new one is displayed
   
   //HACK

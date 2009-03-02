@@ -1,29 +1,33 @@
 package
 {
-	import flash.display.*;
-	import flash.text.*;
+  import flash.display.*;
+  import flash.text.*;
 
   public class DynTextBox extends TextField
   {
+    var txtField:TextField = new TextField();
+
     public function DynTextBox():void
     {
+/*      txtField.background(true);
+      txtField.borderColor(0x1879BE);*/
     }
     public function hide_dynTextBox():void
     {
-      this.visible = false;
+      txtField.visible = false;
     }
     public function show_dynTextBox():void
     {
-      this.visible = true;
+      txtField.visible = true;
     }
     public function set_text(_text:String):void
     {
-      this.text = _text;
+      txtField.text = _text;
     }
     public function set_pos(_xpos:Number, _ypos:Number):void
     {
-      this.x = _xpos;
-      this.y = _ypos;
+      txtField.x = _xpos;
+      txtField.y = _ypos;
     }
   }
 }

@@ -3,7 +3,7 @@ import flash.events.MouseEvent;
 import flash.display.*;
 import flash.text.*;
 import com.classes.Note;
-import DynTextBox;
+//import DynTextBox;
 
 //////////////Constants//////////////
 const DOC_ORIGIN_X:Number = 41;
@@ -115,10 +115,6 @@ function init_noteBtns():void
    this.addChild(crc01);//Document.addChild   ????
    crc01.x = crc01.get_xpos();
    crc01.y = crc01.get_ypos();
-/*   var dyn01:DynTextBox = new DynTextBox();
-   dyn01.hide_dynTextBox();
-   dyn01.set_text(NoteList[0].get_note());
-   this.addChild(dyn01);*/
 
    var crc02:CircleBlue = new CircleBlue();
    crc02.set_noteText(NoteList[1].get_note());

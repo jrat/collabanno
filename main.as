@@ -16,6 +16,7 @@ const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 176;
 const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 72;
 const BTN_CANCEL_ADD_COMMENT_INITX:Number = 120;
 const BTN_CANCEL_ADD_COMMENT_INITY:Number = 72;
+const BTN_NOTE_WIDTH:Number = 25;
 const NOTE_XPOS:Number = 825;
 //////////////Constants//////////////
 
@@ -39,7 +40,8 @@ init_all();
 //////////////Global Vars//////////////
 //Make a list of Notes to store all the ntoes created in thi session
 var NoteList:Array = new Array();
-var CurrentUser:String;
+var CurrentUser:String = "JR";
+var CurrentUserColor:String = "blue";
 var ButtonClasses:Array = new Array("CircleBlue", "CircleGreen", "CircleRed", "CircleOrange");
 //var RectDragBounds:Rectangle = new Rectangle(DOC_ORIGIN_X, (-1*Number.MAX_VALUE), DOC_WIDTH, Number.MAX_VALUE);------------wont let me drag off stge
 //////////////Global Vars//////////////
@@ -67,7 +69,7 @@ function hnd_load_data(e:Event):void
     //Get all notes for this annotator and loop through each one
     for each (var curNote in annotators[i].NOTE)
     {
-      var tmpNote:Note = new Note( annotators[i].attribute("name"), curNote.text(), curNote.attribute("ypos"));
+      var tmpNote:Note = new Note( annotators[i].attribute("name"), annotators[i].attribute("color"), curNote.text(), curNote.attribute("ypos"));
       //Add it to our list
       NoteList.push(tmpNote);
 //      trace(curNote.text()); //Prints the note
@@ -107,8 +109,61 @@ function init_noteBtns():void
         break;
       }
    }*/
+
+  var tmpBlue:CircleBlue;
+  var tmpGreen:CircleGreen;
+  var tmpOrange:CircleOrange;
+  var tmpRed:CircleRed;
+  
+  var currBtnsY:Array = new Array();
+
+  //loop through all notes
+  for (var i:int = 0; i < NoteList.length; i++)/////////////////////////////////////////////////////////////now need to make a fxn that checks the ypos
+  {//////////////////////////////////////////////////////////////////////////////////of all the entered notes. if one exists where this one is trying to
+    //check if we're looking at a new user yet///////////////////////////////////////////go, then add 25pixels to it. this should be called anytime
+    if( NoteList[i].get_colorBtn() == "blue" )//////////////////////////////a new btn is created (here and in the hnd_check)------
+    {
+      tmpBlue = new CircleBlue();
+      tmpBlue.set_noteText(NoteList[i].get_note());
+      tmpBlue.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());
+      Document.addChild(tmpBlue);
+      tmpBlue.x = tmpBlue.get_xpos();
+      tmpBlue.y = tmpBlue.get_ypos();
+      currBtnsY.push(tmpBlue.x);
+    }
+    else if( NoteList[i].get_colorBtn() == "green" )
+    {
+      tmpGreen = new CircleGreen();
+      tmpGreen.set_noteText(NoteList[i].get_note());
+      tmpGreen.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());
+      Document.addChild(tmpGreen);
+      tmpGreen.x = tmpGreen.get_xpos();
+      tmpGreen.y = tmpGreen.get_ypos();
+      currBtnsY.push(tmpGreen.y);
+    }
+    else if( NoteList[i].get_colorBtn() == "orange" )
+    {
+      tmpOrange = new CircleOrange();
+      tmpOrange.set_noteText(NoteList[i].get_note());
+      tmpOrange.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());
+      Document.addChild(tmpOrange);
+      tmpOrange.x = tmpOrange.get_xpos();
+      tmpOrange.y = tmpOrange.get_ypos();
+      currBtnsY.push(tmpOrange.y);
+    }
+    else if( NoteList[i].get_colorBtn() == "red" )
+    {
+      tmpRed = new CircleRed();
+      tmpRed.set_noteText(NoteList[i].get_note());
+      tmpRed.set_pos( (NOTE_XPOS + neededOffset(NoteList[i].get_ypos(), currBtnsY)), NoteList[i].get_ypos());//.set_pos(NOTE_XPOS, NoteList[i].get_ypos());
+      Document.addChild(tmpRed);
+      tmpRed.x = tmpRed.get_xpos();
+      tmpRed.y = tmpRed.get_ypos();
+      currBtnsY.push(tmpRed.y);
+    }
+  }
    
-   //JR
+/*   //JR
    var crc01:CircleBlue = new CircleBlue();
    crc01.set_noteText(NoteList[0].get_note());
    crc01.set_pos(NOTE_XPOS, NoteList[0].get_ypos());
@@ -173,8 +228,26 @@ function init_noteBtns():void
    crc09.set_pos(NOTE_XPOS, NoteList[8].get_ypos());
    Document.addChild(crc09);//Document.addChild   ????
    crc09.x = crc09.get_xpos();
-   crc09.y = crc09.get_ypos();
+   crc09.y = crc09.get_ypos();*/
 
+}
+
+function addBtn():void
+{
+  
+}
+
+//Loops through existing buttons X positions to see if there's any overlapping
+// buttons. if so, returns how much offset the one about to be added needs
+function neededOffset(_newBtnY:Number, _btnsY:Array):Number
+{
+  var offset:Number = 0;
+  for(var i:int=0; i<_btnsY.length; i++)
+  {
+    if(_newBtnY == _btnsY[i])
+      offset += BTN_NOTE_WIDTH;
+  }
+  return(offset);
 }
 
 //Called by load_xml
@@ -241,7 +314,7 @@ function hnd_confAddComment(Event:MouseEvent):void
   //Hide the comment box
   reset_addComment();
   //Create a new Note and add it to our list of current notes
-  var tmpNote:Note = new Note(txtAddComment.text, CurrentUser, btnAddComment.y);
+  var tmpNote:Note = new Note(CurrentUser, CurrentUserColor, txtAddComment.text, btnAddComment.y);
   NoteList.push(tmpNote);
 
   //Refresh our comments so the new one is displayed

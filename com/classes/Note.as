@@ -7,6 +7,7 @@ package com.classes
     private var username:String = "";
     private var note:String = "";
     private var ypos:Number = 0;
+  	var colorBtn:String = "";
 /*
     function Note():void
     {
@@ -14,9 +15,10 @@ package com.classes
       note = "";
       ypos = -1;
     }*/
-    public function Note(_username:String, _note:String, _ypos:Number):void
+    public function Note(_username:String, _colorBtn:String, _note:String, _ypos:Number):void
     {
       username = _username;
+      colorBtn = _colorBtn;
       note = _note;
       ypos = _ypos;
     }
@@ -32,6 +34,15 @@ package com.classes
     {
       ypos = _ypos;
     }
+
+  	public function set_colorBtn(_color:String):void
+  	{
+  	  colorBtn = _color;
+  	}
+  	public function get_colorBtn():String
+  	{
+  	  return(colorBtn);
+  	}
     public function get_username():String
     {
       return(username);

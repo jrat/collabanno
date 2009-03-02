@@ -6,17 +6,17 @@ import com.classes.Note;
 //import DynTextBox;
 
 //////////////Constants//////////////
-const DOC_ORIGIN_X:Number = 41;
-const DOC_ORIGIN_Y:Number = 27;
-const DOC_WIDTH:Number = 800;
-const DOC_HEIGHT:Number = 3108.4;
+const DOC_ORIGIN_X:Number = 18;
+const DOC_ORIGIN_Y:Number = 18;
+const DOC_WIDTH:Number = 900;
+const DOC_HEIGHT:Number = 3494;
 const TXT_ADD_COMMENT_INITX:Number = 0;
 const TXT_ADD_COMMENT_INITY:Number = 0;
 const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 176;
 const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 72;
 const BTN_CANCEL_ADD_COMMENT_INITX:Number = 120;
 const BTN_CANCEL_ADD_COMMENT_INITY:Number = 72;
-const NOTE_XPOS:Number = 725;
+const NOTE_XPOS:Number = 825;
 //////////////Constants//////////////
 
 
@@ -112,14 +112,14 @@ function init_noteBtns():void
    var crc01:CircleBlue = new CircleBlue();
    crc01.set_noteText(NoteList[0].get_note());
    crc01.set_pos(NOTE_XPOS, NoteList[0].get_ypos());
-   this.addChild(crc01);//Document.addChild   ????
+   Document.addChild(crc01);//Document.addChild   ????
    crc01.x = crc01.get_xpos();
    crc01.y = crc01.get_ypos();
 
    var crc02:CircleBlue = new CircleBlue();
    crc02.set_noteText(NoteList[1].get_note());
    crc02.set_pos(NOTE_XPOS, NoteList[1].get_ypos());
-   this.addChild(crc02);//Document.addChild   ????
+   Document.addChild(crc02);//Document.addChild   ????
    crc02.x = crc02.get_xpos();
    crc02.y = crc02.get_ypos();
    
@@ -127,14 +127,14 @@ function init_noteBtns():void
    var crc03:CircleGreen = new CircleGreen();
    crc03.set_noteText(NoteList[2].get_note());
    crc03.set_pos(NOTE_XPOS, NoteList[2].get_ypos());
-   this.addChild(crc03);//Document.addChild   ????
+   Document.addChild(crc03);//Document.addChild   ????
    crc03.x = crc03.get_xpos() + 25;
    crc03.y = crc03.get_ypos();
 
    var crc04:CircleGreen = new CircleGreen();
    crc04.set_noteText(NoteList[3].get_note());
    crc04.set_pos(NOTE_XPOS, NoteList[3].get_ypos());
-   this.addChild(crc04);//Document.addChild   ????
+   Document.addChild(crc04);//Document.addChild   ????
    crc04.x = crc04.get_xpos();
    crc04.y = crc04.get_ypos();
 
@@ -142,7 +142,7 @@ function init_noteBtns():void
    var crc05:CircleRed = new CircleRed();
    crc05.set_noteText(NoteList[4].get_note());
    crc05.set_pos(NOTE_XPOS, NoteList[4].get_ypos());
-   this.addChild(crc05);//Document.addChild   ????
+   Document.addChild(crc05);//Document.addChild   ????
    crc05.x = crc05.get_xpos() + 50;
    crc05.y = crc05.get_ypos();
 
@@ -150,28 +150,28 @@ function init_noteBtns():void
    var crc06:CircleOrange = new CircleOrange();
    crc06.set_noteText(NoteList[5].get_note());
    crc06.set_pos(NOTE_XPOS, NoteList[5].get_ypos());
-   this.addChild(crc06);//Document.addChild   ????
+   Document.addChild(crc06);//Document.addChild   ????
    crc06.x = crc06.get_xpos();
    crc06.y = crc06.get_ypos();
 
    var crc07:CircleOrange = new CircleOrange();
    crc07.set_noteText(NoteList[6].get_note());
    crc07.set_pos(NOTE_XPOS, NoteList[6].get_ypos());
-   this.addChild(crc07);//Document.addChild   ????
+   Document.addChild(crc07);//Document.addChild   ????
    crc07.x = crc07.get_xpos();
    crc07.y = crc07.get_ypos();
    
    var crc08:CircleOrange = new CircleOrange();
    crc08.set_noteText(NoteList[7].get_note());
    crc08.set_pos(NOTE_XPOS, NoteList[7].get_ypos());
-   this.addChild(crc08);//Document.addChild   ????
+   Document.addChild(crc08);//Document.addChild   ????
    crc08.x = crc08.get_xpos();
    crc08.y = crc08.get_ypos();
 
    var crc09:CircleOrange = new CircleOrange();
    crc09.set_noteText(NoteList[8].get_note());
    crc09.set_pos(NOTE_XPOS, NoteList[8].get_ypos());
-   this.addChild(crc09);//Document.addChild   ????
+   Document.addChild(crc09);//Document.addChild   ????
    crc09.x = crc09.get_xpos();
    crc09.y = crc09.get_ypos();
 

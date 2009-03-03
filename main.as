@@ -25,8 +25,9 @@ const NOTE_XPOS:Number = 825;
 //Dragging
 Document.addEventListener(MouseEvent.MOUSE_DOWN, hnd_drag);
 Document.addEventListener(MouseEvent.MOUSE_UP, hnd_drag_stop);
+Document.addEventListener(MouseEvent.DOUBLE_CLICK, hnd_addComment);
 //Add Comment Buttons
-btnAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_addComment);
+//Document.btnAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_addComment);
 btnConfirmAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_confAddComment);
 btnCancelAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_cancelAddComment);
 //////////////Event Handlers//////////////
@@ -53,6 +54,7 @@ var XmlData:XML = new XML(); //global
 XmlLoaderData.addEventListener(Event.COMPLETE, hnd_load_data);
 XmlLoaderData.load(new URLRequest("data/data.xml"));
 
+Document.doubleClickEnabled = true;
 //////////////RUN//////////////
  
 
@@ -118,74 +120,6 @@ function init_noteBtns():void
     //check if we're looking at a new user yet///////////////////////////////////////////go, then add 25pixels to it. this should be called anytime
     addBtn(NoteList[i]);
   }
-   
-/*   //JR
-   var crc01:CircleBlue = new CircleBlue();
-   crc01.set_noteText(NoteList[0].get_note());
-   crc01.set_pos(NOTE_XPOS, NoteList[0].get_ypos());
-   Document.addChild(crc01);//Document.addChild   ????
-   crc01.x = crc01.get_xpos();
-   crc01.y = crc01.get_ypos();
-
-   var crc02:CircleBlue = new CircleBlue();
-   crc02.set_noteText(NoteList[1].get_note());
-   crc02.set_pos(NOTE_XPOS, NoteList[1].get_ypos());
-   Document.addChild(crc02);//Document.addChild   ????
-   crc02.x = crc02.get_xpos();
-   crc02.y = crc02.get_ypos();
-   
-   //Jenna
-   var crc03:CircleGreen = new CircleGreen();
-   crc03.set_noteText(NoteList[2].get_note());
-   crc03.set_pos(NOTE_XPOS, NoteList[2].get_ypos());
-   Document.addChild(crc03);//Document.addChild   ????
-   crc03.x = crc03.get_xpos() + 25;
-   crc03.y = crc03.get_ypos();
-
-   var crc04:CircleGreen = new CircleGreen();
-   crc04.set_noteText(NoteList[3].get_note());
-   crc04.set_pos(NOTE_XPOS, NoteList[3].get_ypos());
-   Document.addChild(crc04);//Document.addChild   ????
-   crc04.x = crc04.get_xpos();
-   crc04.y = crc04.get_ypos();
-
-   //Steve
-   var crc05:CircleRed = new CircleRed();
-   crc05.set_noteText(NoteList[4].get_note());
-   crc05.set_pos(NOTE_XPOS, NoteList[4].get_ypos());
-   Document.addChild(crc05);//Document.addChild   ????
-   crc05.x = crc05.get_xpos() + 50;
-   crc05.y = crc05.get_ypos();
-
-   //Kristen
-   var crc06:CircleOrange = new CircleOrange();
-   crc06.set_noteText(NoteList[5].get_note());
-   crc06.set_pos(NOTE_XPOS, NoteList[5].get_ypos());
-   Document.addChild(crc06);//Document.addChild   ????
-   crc06.x = crc06.get_xpos();
-   crc06.y = crc06.get_ypos();
-
-   var crc07:CircleOrange = new CircleOrange();
-   crc07.set_noteText(NoteList[6].get_note());
-   crc07.set_pos(NOTE_XPOS, NoteList[6].get_ypos());
-   Document.addChild(crc07);//Document.addChild   ????
-   crc07.x = crc07.get_xpos();
-   crc07.y = crc07.get_ypos();
-   
-   var crc08:CircleOrange = new CircleOrange();
-   crc08.set_noteText(NoteList[7].get_note());
-   crc08.set_pos(NOTE_XPOS, NoteList[7].get_ypos());
-   Document.addChild(crc08);//Document.addChild   ????
-   crc08.x = crc08.get_xpos();
-   crc08.y = crc08.get_ypos();
-
-   var crc09:CircleOrange = new CircleOrange();
-   crc09.set_noteText(NoteList[8].get_note());
-   crc09.set_pos(NOTE_XPOS, NoteList[8].get_ypos());
-   Document.addChild(crc09);//Document.addChild   ????
-   crc09.x = crc09.get_xpos();
-   crc09.y = crc09.get_ypos();*/
-
 }
 
 function addBtn(_curNote:Note):void
@@ -200,7 +134,7 @@ function addBtn(_curNote:Note):void
     Document.addChild(tmpBlue);
     tmpBlue.x = tmpBlue.get_xpos();
     tmpBlue.y = tmpBlue.get_ypos();
-    CurrBtnsY.push(tmpBlue.x);
+//    CurrBtnsY.push(tmpBlue.x);
   }
   else if( _curNote.get_colorBtn() == "green" )
   {
@@ -210,7 +144,7 @@ function addBtn(_curNote:Note):void
     Document.addChild(tmpGreen);
     tmpGreen.x = tmpGreen.get_xpos();
     tmpGreen.y = tmpGreen.get_ypos();
-    CurrBtnsY.push(tmpGreen.y);
+//    CurrBtnsY.push(tmpGreen.y);
   }
   else if( _curNote.get_colorBtn() == "orange" )
   {
@@ -220,7 +154,7 @@ function addBtn(_curNote:Note):void
     Document.addChild(tmpOrange);
     tmpOrange.x = tmpOrange.get_xpos();
     tmpOrange.y = tmpOrange.get_ypos();
-    CurrBtnsY.push(tmpOrange.y);
+//    CurrBtnsY.push(tmpOrange.y);
   }
   else if( _curNote.get_colorBtn() == "red" )
   {
@@ -230,7 +164,6 @@ function addBtn(_curNote:Note):void
     Document.addChild(tmpRed);
     tmpRed.x = tmpRed.get_xpos();
     tmpRed.y = tmpRed.get_ypos();
-    CurrBtnsY.push(tmpRed.y);
   }
 }
 
@@ -238,12 +171,19 @@ function addBtn(_curNote:Note):void
 // buttons. if so, returns how much offset the one about to be added needs
 function neededOffset(_newBtnY:Number):Number
 {
+//  trace("IN NEEDEDOFFSET _newBtnY: " + _newBtnY);
   var offset:Number = 0;
   for(var i:int=0; i<CurrBtnsY.length; i++)
   {
+//    trace(CurrBtnsY[i]);
     if(_newBtnY == CurrBtnsY[i])
+    {
+//      trace("moving over");
       offset += BTN_NOTE_WIDTH;
+    }
   }
+//  trace("returning: " + offset);
+  CurrBtnsY.push(_newBtnY);
   return(offset);
 }
 
@@ -251,7 +191,6 @@ function neededOffset(_newBtnY:Number):Number
 function show_noteBtns():void
 {
 
-  
 
 /*  var noteList:XMLList = XmlData.DOCUMENT.USER.NOTE;
   for each (var noteElement:XML in noteList)
@@ -304,12 +243,12 @@ function hnd_drag_stop(Event:MouseEvent):void
 function hnd_addComment(Event:MouseEvent):void
 {
   //Display the text box and buttons
-  show_addComment();
+  show_addComment(Event.localX, Event.localY);
 }
 function hnd_confAddComment(Event:MouseEvent):void
 {
   //Create a new Note and add it to our list of current notes
-  var tmpNote:Note = new Note(CurrentUser, CurrentUserColor, txtAddComment.text, btnAddComment.y);
+  var tmpNote:Note = new Note(CurrentUser, CurrentUserColor, txtAddComment.text, Document.btnAddComment.y);
   addBtn(tmpNote);
 //  NoteList.push(tmpNote);////////////////////////////////////////----------------------------------------------------needed??????
 
@@ -364,6 +303,8 @@ function reset_addComment():void
   txtAddComment.visible = false;
   btnConfirmAddComment.visible = false;
   btnCancelAddComment.visible = false;
+  Document.btnAddComment.visible = false;
+
   //Clear the text
   txtAddComment.text = "";
   //Place them in their starting positions
@@ -374,20 +315,26 @@ function reset_addComment():void
   btnCancelAddComment.x = BTN_CANCEL_ADD_COMMENT_INITX;
   btnCancelAddComment.y = BTN_CANCEL_ADD_COMMENT_INITY;
 }
-function show_addComment():void
+function show_addComment(_xpos:Number, _ypos:Number):void
 {
-  //Hide all the elements
-  txtAddComment.visible = true;
-  btnConfirmAddComment.visible = true;
-  btnCancelAddComment.visible = true;
-  //Place them in their appropriate place by the button
-  txtAddComment.x = btnAddComment.x + 10;
-  txtAddComment.y = btnAddComment.y;
+ 
+  Document.btnAddComment.x = DOC_WIDTH + 10;
+  Document.btnAddComment.y = _ypos;
+  
+  //Place them in their appropriate place according to where they clicked
+  txtAddComment.x = DOC_WIDTH + 40;//Document.btnAddComment.x + 10;
+  txtAddComment.y = _ypos;//Document.btnAddComment.y;
   //These are relative to the placement of the text box
   btnConfirmAddComment.x = txtAddComment.x + (BTN_CONFIRM_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
   btnConfirmAddComment.y = txtAddComment.y + (BTN_CONFIRM_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
   btnCancelAddComment.x = txtAddComment.x + (BTN_CANCEL_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
   btnCancelAddComment.y = txtAddComment.y + (BTN_CANCEL_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
+
+  //Show all the elements
+  txtAddComment.visible = true;
+  btnConfirmAddComment.visible = true;
+  btnCancelAddComment.visible = true;
+  Document.btnAddComment.visible = true;
 }
 
 //////////////Other Functionality//////////////

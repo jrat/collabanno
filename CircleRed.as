@@ -25,7 +25,7 @@ package
       dynTextBox.defaultTextFormat = format;
     	dynTextBox.background = true;
     	dynTextBox.border = true;
-    	dynTextBox.borderColor = 0x1879BE;
+    	dynTextBox.borderColor = 0x941400;
     	dynTextBox.wordWrap = true;
     	dynTextBox.visible = false;
   	}
@@ -34,7 +34,7 @@ package
       xpos = _xpos;
       ypos = _ypos;
 //      dynTextBox.set_pos(_xpos, _ypos);
-      dynTextBox.x = _xpos;
+      dynTextBox.x = 900;
       dynTextBox.y = _ypos;
     }
     public function get_xpos():Number

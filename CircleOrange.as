@@ -28,6 +28,8 @@ package
     	dynTextBox.borderColor = 0xae3510;
     	dynTextBox.wordWrap = true;
     	dynTextBox.visible = false;
+    	dynTextBox.autoSize = TextFieldAutoSize.CENTER;
+    	dynTextBox.width = 250;
   	}
     public function set_pos(_xpos:Number, _ypos:Number):void
     {

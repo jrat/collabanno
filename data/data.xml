@@ -1,21 +1,21 @@
 <ROOT>
 <DOCUMENT src="docs/doc.jpg" title="Inventing the Medium">
   <USER name="JR" color="blue">
-    <NOTE ypos="200">I don't understand what she's referring to here</NOTE>
-    <NOTE ypos="225">This is an interesting point regarding the digital medium</NOTE>
+    <NOTE ypos="300">I don't understand what she's referring to here</NOTE>
+    <NOTE ypos="325">This is an interesting point regarding the digital medium</NOTE>
   </USER>
   <USER name="Jenna" color="green">
-    <NOTE ypos="200">She's talking about digital life</NOTE>
-    <NOTE ypos="300">I disagree with this after having read this www.google.com</NOTE>
+    <NOTE ypos="300">She's talking about digital life</NOTE>
+    <NOTE ypos="400">I disagree with this after having read this www.google.com</NOTE>
   </USER>
   <USER name="Steve" color="orange">
-    <NOTE ypos="200">I think she's talking a/b something else. We should ask her in class</NOTE>
+    <NOTE ypos="300">I think she's talking a/b something else. We should ask her in class</NOTE>
   </USER>
   <USER name="Kristen" color="red">
-    <NOTE ypos="250">"Buzz words encourage ambiguity" -JHM</NOTE>
-    <NOTE ypos="275">haha - she really hates Microsoft!</NOTE>
-    <NOTE ypos="300">Norman would disagree with this</NOTE>
-    <NOTE ypos="500">I completely agree here.</NOTE>
+    <NOTE ypos="350">"Buzz words encourage ambiguity" -JHM</NOTE>
+    <NOTE ypos="375">haha - she really hates Microsoft!</NOTE>
+    <NOTE ypos="400">Norman would disagree with this</NOTE>
+    <NOTE ypos="600">I completely agree here.</NOTE>
   </USER>
 </DOCUMENT>
 </ROOT>

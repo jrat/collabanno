@@ -50,7 +50,7 @@ function hnd_txtDescClicked(e:Event):void
 
 function hnd_finish(e:Event):void
 {
-  gotoAndStop("blankDoc");
+  gotoAndStop("frmDoc");
 }
 
 function hnd_openBrowseDialog(e:Event):void

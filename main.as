@@ -7,7 +7,7 @@ import com.classes.Note;
 
 //////////////Constants//////////////
 const DOC_ORIGIN_X:Number = 18;
-const DOC_ORIGIN_Y:Number = 18;
+const DOC_ORIGIN_Y:Number = 146;
 const DOC_WIDTH:Number = 900;
 const DOC_HEIGHT:Number = 3494;
 const TXT_ADD_COMMENT_INITX:Number = 0;

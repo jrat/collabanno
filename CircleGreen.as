@@ -51,7 +51,7 @@ package
   	{
 //      noteText = _noteText;
 //      dynTextBox.set_text(_noteText);
-      dynTextBox.text = _noteText;
+      dynTextBox.text =  "Jenna\n" + _noteText;
   	}
   	public function get_noteText():String
   	{

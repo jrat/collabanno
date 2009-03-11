@@ -12,10 +12,10 @@ const DOC_WIDTH:Number = 900;
 const DOC_HEIGHT:Number = 3494;
 const TXT_ADD_COMMENT_INITX:Number = 0;
 const TXT_ADD_COMMENT_INITY:Number = 0;
-const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 176;
-const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 72;
-const BTN_CANCEL_ADD_COMMENT_INITX:Number = 120;
-const BTN_CANCEL_ADD_COMMENT_INITY:Number = 72;
+const BTN_CONFIRM_ADD_COMMENT_INITX:Number = 188;
+const BTN_CONFIRM_ADD_COMMENT_INITY:Number = 56;
+const BTN_CANCEL_ADD_COMMENT_INITX:Number = 155;
+const BTN_CANCEL_ADD_COMMENT_INITY:Number = 56;
 const BTN_NOTE_WIDTH:Number = 25;
 const NOTE_XPOS:Number = 825;
 //////////////Constants//////////////

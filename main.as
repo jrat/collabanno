@@ -3,7 +3,6 @@ import flash.events.MouseEvent;
 import flash.display.*;
 import flash.text.*;
 import com.classes.Note;
-//import DynTextBox;
 
 //////////////Constants//////////////
 const DOC_ORIGIN_X:Number = 18;
@@ -28,8 +27,8 @@ Document.addEventListener(MouseEvent.MOUSE_UP, hnd_drag_stop);
 Document.addEventListener(MouseEvent.DOUBLE_CLICK, hnd_addComment);
 //Add Comment Buttons
 //Document.btnAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_addComment);
-btnConfirmAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_confAddComment);
-btnCancelAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_cancelAddComment);
+Document.btnConfirmAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_confAddComment);
+Document.btnCancelAddComment.addEventListener(MouseEvent.MOUSE_UP, hnd_cancelAddComment);
 //////////////Event Handlers//////////////
 
 
@@ -248,7 +247,7 @@ function hnd_addComment(Event:MouseEvent):void
 function hnd_confAddComment(Event:MouseEvent):void
 {
   //Create a new Note and add it to our list of current notes
-  var tmpNote:Note = new Note(CurrentUser, CurrentUserColor, txtAddComment.text, Document.btnAddComment.y);
+  var tmpNote:Note = new Note(CurrentUser, CurrentUserColor, Document.txtAddComment.text, Document.btnAddComment.y);
   addBtn(tmpNote);
 //  NoteList.push(tmpNote);////////////////////////////////////////----------------------------------------------------needed??????
 
@@ -300,20 +299,20 @@ function check_bounds():void
 function reset_addComment():void
 {
   //Hide all the elements
-  txtAddComment.visible = false;
-  btnConfirmAddComment.visible = false;
-  btnCancelAddComment.visible = false;
+  Document.txtAddComment.visible = false;
+  Document.btnConfirmAddComment.visible = false;
+  Document.btnCancelAddComment.visible = false;
   Document.btnAddComment.visible = false;
 
   //Clear the text
-  txtAddComment.text = "";
+  Document.txtAddComment.text = "";
   //Place them in their starting positions
-  txtAddComment.x = TXT_ADD_COMMENT_INITX;
-  txtAddComment.y = TXT_ADD_COMMENT_INITY;
-  btnConfirmAddComment.x = BTN_CONFIRM_ADD_COMMENT_INITX;
-  btnConfirmAddComment.y = BTN_CONFIRM_ADD_COMMENT_INITY;
-  btnCancelAddComment.x = BTN_CANCEL_ADD_COMMENT_INITX;
-  btnCancelAddComment.y = BTN_CANCEL_ADD_COMMENT_INITY;
+  Document.txtAddComment.x = TXT_ADD_COMMENT_INITX;
+  Document.txtAddComment.y = TXT_ADD_COMMENT_INITY;
+  Document.btnConfirmAddComment.x = BTN_CONFIRM_ADD_COMMENT_INITX;
+  Document.btnConfirmAddComment.y = BTN_CONFIRM_ADD_COMMENT_INITY;
+  Document.btnCancelAddComment.x = BTN_CANCEL_ADD_COMMENT_INITX;
+  Document.btnCancelAddComment.y = BTN_CANCEL_ADD_COMMENT_INITY;
 }
 function show_addComment(_xpos:Number, _ypos:Number):void
 {
@@ -322,18 +321,18 @@ function show_addComment(_xpos:Number, _ypos:Number):void
   Document.btnAddComment.y = _ypos;
   
   //Place them in their appropriate place according to where they clicked
-  txtAddComment.x = DOC_WIDTH + 40;//Document.btnAddComment.x + 10;
-  txtAddComment.y = _ypos;//Document.btnAddComment.y;
+  Document.txtAddComment.x = DOC_WIDTH + 40;//Document.btnAddComment.x + 10;
+  Document.txtAddComment.y = _ypos;//Document.btnAddComment.y;
   //These are relative to the placement of the text box
-  btnConfirmAddComment.x = txtAddComment.x + (BTN_CONFIRM_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
-  btnConfirmAddComment.y = txtAddComment.y + (BTN_CONFIRM_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
-  btnCancelAddComment.x = txtAddComment.x + (BTN_CANCEL_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
-  btnCancelAddComment.y = txtAddComment.y + (BTN_CANCEL_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
+  Document.btnConfirmAddComment.x = Document.txtAddComment.x + (BTN_CONFIRM_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
+  Document.btnConfirmAddComment.y = Document.txtAddComment.y + (BTN_CONFIRM_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
+  Document.btnCancelAddComment.x = Document.txtAddComment.x + (BTN_CANCEL_ADD_COMMENT_INITX-TXT_ADD_COMMENT_INITX);
+  Document.btnCancelAddComment.y = Document.txtAddComment.y + (BTN_CANCEL_ADD_COMMENT_INITY-TXT_ADD_COMMENT_INITY);
 
   //Show all the elements
-  txtAddComment.visible = true;
-  btnConfirmAddComment.visible = true;
-  btnCancelAddComment.visible = true;
+  Document.txtAddComment.visible = true;
+  Document.btnConfirmAddComment.visible = true;
+  Document.btnCancelAddComment.visible = true;
   Document.btnAddComment.visible = true;
 }
 
